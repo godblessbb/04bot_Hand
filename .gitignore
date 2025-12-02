@@ -1,0 +1,12 @@
+**/build/
+**/install/
+**/log/
+
+**/venv/
+**/.venv/
+
+**/.vscode/
+**/*.pt
+**/*.pth
+**/robot_data*
+**/robot_data.json

@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 3.22)
+project(jaka_minicobo_moveit_config)
+
+find_package(ament_cmake REQUIRED)
+
+find_package(ament_cmake REQUIRED)
+find_package(moveit_ros_planning_interface REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(moveit_msgs REQUIRED)
+find_package(jaka_msgs REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+
+set(dependencies "rclcpp" "std_msgs" "geometry_msgs" "moveit_msgs" "jaka_msgs" "moveit_ros_planning_interface" "tf2_geometry_msgs")
+
+include_directories(
+  include
+  ${ament_INCLUDE_DIRS}
+)
+
+add_executable(moveit_executor_node src/moveit_executor_node.cpp)
+ament_target_dependencies(moveit_executor_node
+  ${dependencies}
+)
+
+target_link_libraries(moveit_executor_node 
+  ${ament_LIBRARIES}
+)
+
+install(TARGETS moveit_executor_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+ament_package()
+
+install(DIRECTORY launch DESTINATION share/${PROJECT_NAME}
+  PATTERN "setup_assistant.launch" EXCLUDE)
+install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
+install(FILES .setup_assistant DESTINATION share/${PROJECT_NAME})

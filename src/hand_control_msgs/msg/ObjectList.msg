@@ -1,0 +1,1 @@
+hand_control_msgs/Object[] objects
